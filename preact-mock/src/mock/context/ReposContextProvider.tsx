@@ -1,16 +1,16 @@
-import { FunctionComponent } from 'preact';
-import { useState } from 'preact/hooks';
-import { h } from 'preact';
-import ReposContext from './ReposContext';
+import { FunctionComponent } from "preact";
+import { h } from "preact";
+import ReposContext from "./ReposContext";
+import useRepos from "../hooks/useRepos";
 
 const ReposContextProvider: FunctionComponent = ({ children }) => {
-    const [repos, setRepos] = useState<any>();
+  const { data, loading, error } = useRepos();
 
-    const value = { repos, setRepos };
+  const value = { data, loading, error };
 
-    return (
-        <ReposContext.Provider value={value}>{children}</ReposContext.Provider>
-    );
+  return (
+    <ReposContext.Provider value={value}>{children}</ReposContext.Provider>
+  );
 };
 
 export default ReposContextProvider;
